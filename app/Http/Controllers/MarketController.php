@@ -12,7 +12,9 @@ class MarketController extends Controller
      */
     public function index()
     {
-        //
+        $Markets = Market::paginate(10);
+
+        return view('dashboard', compact('Markets'));
     }
 
     /**
@@ -61,5 +63,12 @@ class MarketController extends Controller
     public function destroy(Market $market)
     {
         //
+    }
+
+    public function checkout(string $id)
+    {
+        $Markets = Market::findOrFail($id);
+
+        return view('checkout', compact('Markets'));
     }
 }
