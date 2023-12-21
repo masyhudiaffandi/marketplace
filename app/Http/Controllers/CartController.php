@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Market;
-use App\Models\Shipment;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
-class MarketController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Markets = Market::paginate(10);
-
-        return view('dashboard', compact('Markets'));
+        //
     }
 
     /**
@@ -31,13 +28,26 @@ class MarketController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $Photo = null;
+
+        if ($request->hasFile('photo')) {
+            $Photo = $request->file('photo')->store('public/photo');
+        }
+
+        Cart::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'desc' => $request->desc,
+            'photo' => $Photo,
+            'shipping_id' => $request->shipping_id,
+        ]);
+
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Market $market)
+    public function show(Cart $cart)
     {
         //
     }
@@ -45,7 +55,7 @@ class MarketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Market $market)
+    public function edit(Cart $cart)
     {
         //
     }
@@ -53,7 +63,7 @@ class MarketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Market $market)
+    public function update(Request $request, Cart $cart)
     {
         //
     }
@@ -61,16 +71,8 @@ class MarketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Market $market)
+    public function destroy(Cart $cart)
     {
         //
-    }
-
-    public function checkout($id)
-    {
-        $Market = Market::find($id);
-        $Shipments = Shipment::get();
-
-        return view('checkout', compact(['Market', 'Shipments']));
     }
 }

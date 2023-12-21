@@ -2,20 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Market;
 use App\Models\Shipment;
 use Illuminate\Http\Request;
 
-class MarketController extends Controller
+class ShipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $Markets = Market::paginate(10);
+        $Shipments = Shipment::get();
 
-        return view('dashboard', compact('Markets'));
+        return view('checkout', compact('Shipments'));
     }
 
     /**
@@ -37,7 +36,7 @@ class MarketController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Market $market)
+    public function show(Shipment $shipment)
     {
         //
     }
@@ -45,7 +44,7 @@ class MarketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Market $market)
+    public function edit(Shipment $shipment)
     {
         //
     }
@@ -53,7 +52,7 @@ class MarketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Market $market)
+    public function update(Request $request, Shipment $shipment)
     {
         //
     }
@@ -61,16 +60,8 @@ class MarketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Market $market)
+    public function destroy(Shipment $shipment)
     {
         //
-    }
-
-    public function checkout($id)
-    {
-        $Market = Market::find($id);
-        $Shipments = Shipment::get();
-
-        return view('checkout', compact(['Market', 'Shipments']));
     }
 }

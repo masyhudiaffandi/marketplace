@@ -30,7 +30,7 @@
                                     <td class="p-3">{{ $M->desc }}</td>
                                     <td class="p-3">
                                         <button class="bg-blue-500 text-white px-4 py-2 rounded">
-                                            <a href="{{ route('market.checkout', $Market->id) }}">Beli</a>
+                                            <a href="{{ route('market.checkout', $M->id) }}">Beli</a>
                                         </button>
                                     </td>
                                 </tr>
